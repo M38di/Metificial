@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+            <h1 class="h1">Metificial</h1>
+
+            <textarea id="promptInput" placeholder="Enter your image prompt here" rows="4"></textarea>
+
+            <!-- Custom Model Dropdown Menu -->
+            <div class="dropdown">
+                <div class="dropdown-toggle" onclick="toggleDropdown('modelDropdown', this)">
+                    <span id="selectedModel">Select Model</span>
+                    <i class="fa-solid fa-chevron-down icon"></i>
+                </div>
+                <div id="modelDropdown" class="dropdown-menu">
+                    <div class="dropdown-item" onclick="selectModel('https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev', 'FLUX.1-DEV')">FLUX.1-DEV</div>
+                    <div class="dropdown-item" onclick="selectModel('https://api-inference.huggingface.co/models/renderartist/toyboxflux', 'FLUX.1-3D')">FLUX.1-3D</div>
+                    <div class="dropdown-item" onclick="selectModel('https://api-inference.huggingface.co/models/jbilcke-hf/flux-dev-panorama-lora-2', 'FLUX.1-Panorama')">FLUX.1-Panorama</div>
+                    <div class="dropdown-item" onclick="selectModel('https://api-inference.huggingface.co/models/aleksa-codes/flux-ghibsky-illustration', 'FLUX.1-Illustration')">FLUX.1-Illustration</div>
+                    <div class="dropdown-item" onclick="selectModel('https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell', 'FLUX.1-Schnell')">FLUX.1-Schnell</div>
+                    <div class="dropdown-item" onclick="selectModel('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large', 'Stable-Diffusion3.5')">Stable-Diffusion3.5</div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <div class="dropdown-toggle" onclick="toggleDropdown('aspectRatioDropdown', this)">
+                    <span id="selectedAspectRatio">Select Aspect Ratio</span>
+                    <i class="fa-solid fa-chevron-down icon"></i>
+                </div>
+                <div id="aspectRatioDropdown" class="dropdown-menu">
+                    <div class="dropdown-item" onclick="selectAspectRatio('1:1')">1:1</div>
+                    <div class="dropdown-item" onclick="selectAspectRatio('16:9')">16:9</div>
+                    <div class="dropdown-item" onclick="selectAspectRatio('9:16')">9:16</div>
+                    <div class="dropdown-item" onclick="selectAspectRatio('4:3')">4:3</div>
+                    <div class="dropdown-item" onclick="selectAspectRatio('3:4')">3:4</div>
+                </div>
+            </div>
+
+            <input type="number" id="seedInput" placeholder="Enter seed value (optional)" />
+
+            <div class="checkbox-container" onclick="toggleRandomSeed()">
+                <i id="randomSeedIcon" class="fa-duotone fa-solid fa-square"></i>
+                <span> Random Seed</span>
+            </div>
+
+            <button onclick="generateImage()">
+                <i class="fa-duotone fa-solid fa-paintbrush-pencil" style="margin-right: 6px;"></i>
+                <span>Generate Image</span>
+            </button>
+        </div>
+
+        <div class="image-container" id="result">
+            <button id="downloadButton" onclick="downloadImage()" disabled>
+                <i class="fa-duotone fa-solid fa-download" style="margin-right: 6px;"></i>
+                <span>Download Image</span>
+            </button>
+            <div id="tooltip" class="tooltip">Download is disabled until an image is generated.</div>
+            <img id="generatedImage" style="display: none;">
+            <i id="loadingIcon" class="fa-duotone fa-spinner-third fa-spin loading-icon"></i>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
