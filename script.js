@@ -85,7 +85,7 @@ async function generateImage() {
     const response = await fetch(selectedModel, { 
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer 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', 
+            'Authorization': 'Bearer AUTH_TOKEN_PLACEHOLDER', 
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ 
